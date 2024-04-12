@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+
+    <link href="index.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css"
+    />
+
+    <script src="./matter.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script> -->
+    <script>
+
+    </script>
+    
+
+    <title>稻种堆堆乐</title>
+
+    <!-- <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="watermelon" />
+    <meta property="og:title" content="watermelon" />
+    <meta property="og:description" content="Play Watermelon Game!" />
+    <meta property="og:image" content="assets/img/10.png" />
+    <meta property="og:image:type" content="image/png" /> -->
+
+    <link rel="icon shortcut" href="assets/img/10.png" type="image/x-icon" />
+  </head>
+
+  <body>
+    <div class="bg">
+        <img src="./assets/img/bg.jpg" alt="" style="  width: 100vw;
+        height: 100vh;
+        position: fixed;
+        z-index: -1;
+      ">
+    </div>
+      <div class="container">
+          <div class="item"></div>
+
+          <div class="item" id="game"style=" position: relative;top: 100px;">
+              <div id="overlay">
+                  <button id="playAgainButton" onclick="location.reload()">
+                      Play Again
+                  </button>
+              </div>
+              <canvas id="canvas"></canvas>
+              <div id="floor"></div>
+          </div>
+
+          <div class="empty"></div>
+          <div class="empty"></div>
+
+          <div class="item" id="footer12">
+              <!-- <p style="color: black;">小小科学家 A little scientist </p> -->
+          </div>
+      </div>
+
+      <div class="item" id="footer1">
+          <div class="image-container">
+              <img src="assets/icon/A.png" alt="Image Description">
+              <p style="color: black;">
+                  水稻是一种重要的粮食作物,广泛种植于亚洲和其他热带地区,为全球数十亿人提供主要食粮,是人类历史上最早被驯化的作物之一。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer2">
+          <div class="image-container">
+              <img src="assets/icon/B.png" alt="Image Description">
+              <p style="color: black;">
+                  粽子，由粽叶包裹糯米蒸制而成的食品，是中国传统节庆食物之一。粽子作为中国历史文化积淀最深厚的传统食品之一，全国各地，形状风味迥异，主要有咸、甜两种。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer3">
+          <div class="image-container">
+              <img src="assets/icon/C.png" alt="Image Description">
+              <p style="color: black;">
+                  元宵是中国汉族传统小吃之一，属于节日食俗。起初，人们把这种食物叫“浮圆子”，后来又叫“汤团”或“汤圆”，这些名称都与“团圆”字音相近，取团圆之意，象征全家人团团圆圆，和睦幸福，人们也以此怀念离别的亲人，寄托了对未来生活的美好期望。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer4">
+          <div class="image-container">
+              <img src="assets/icon/D.png" alt="Image Description">
+              <p style="color: black;">
+                  在稻作文化中，大米与制造酒精饮料的关系更为密切。这些稻米酒不仅为了日常饮用，还担负着祭祀、丧葬等仪式中的某些特殊功能。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer5">
+          <div class="image-container">
+              <img src="assets/icon/E.png" alt="Image Description">
+              <p style="color: black;">
+                  过去人们会使用稻草或类似的草料来编织草帽、草鞋、蒲团等日用品。作为传统手工艺技能，稻草编织不仅体现了民间艺人的生活智慧，也反映了人们对大自然的和谐利用。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer6">
+          <div class="image-container">
+              <img src="assets/icon/F.png" alt="Image Description">
+              <p style="color: black;">
+                  稻米及其副产品如米糠油等,都可以作为动物饲料的原料使用。稻米饲料不仅营养性、安全性高，还拓宽了饲料资源的种类和应用技术，对缓解优质饲料资源的供需矛盾具有重要意义。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer7">
+          <div class="image-container">
+              <img src="assets/icon/G.png" alt="Image Description">
+              <p style="color: black;">
+                  大米的营养物质这么丰富，其抗氧化、美白功能显著，其功效主要来自于其大米的蛋白水解后的活性多肽等酶解产物。大米多肽具有纯天然的保湿、防皱、除痘、祛斑等作用，因此稻米也被广泛应用于美容、美肤、美发用品中。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer8">
+          <div class="image-container">
+              <img src="assets/icon/H.png" alt="Image Description">
+              <p style="color: black;">
+                  稻米在药品研发也有广泛应用前景。科研人员通过研发与人体微营养调节相关的功能性大米产品、药品，来缓解高血压、糖尿病等疾病，更好地服务于人体健康。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer9">
+          <div class="image-container">
+              <img src="assets/icon/I.png" alt="Image Description">
+              <p style="color: black;">
+                  历史上米糊、米浆一直是房屋修葺的重要粘合材料，现代科研人员也在探索稻米烧制砖块作为建筑材料的可能，将稻草等自然材料融入建筑设计的理念是"有机建筑"的一种重要尝试。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer10">
+          <div class="image-container">
+              <img src="assets/icon/J.png" alt="Image Description">
+              <p style="color: black;">
+                  企业生产废弃的稻壳经济价值不高，长时间堆积存放还会污染环境，我国企业创意性地用稻壳来发电，再满足企业自身用电的同时，还将多余的电输送至电网。如此，稻壳废物利用既节约能源资源，又高效地保护了生态环境。
+              </p>
+          </div>
+      </div>
+
+      <div class="item" id="footer11">
+          <div class="image-container">
+              <img src="assets/icon/K.png" alt="Image Description">
+              <p style="color: black;">
+                  水稻种植有助于维护当地生态系统。水稻在种植和生长过程中会影响当地的水文、土壤、生物多样性等诸多生态要素，采取可持续的种植方式,有利于维护我们地球的生态发展。
+              </p>
+          </div>
+      </div>
+
+      <!-- <script defer src="index.js"></script> -->
+      <script>
+        (() => {
+            const Engine = Matter.Engine,
+                Render = Matter.Render,
+                World = Matter.World,
+                Body = Matter.Body,
+                Bodies = Matter.Bodies,
+                Events = Matter.Events,
+                Composite = Matter.Composite;
+
+            const parent = document.getElementById("game");
+            const canvas = document.getElementById("canvas");
+            var gameOverlayer = document.getElementById("overlay");
+            const floor = document.getElementById("floor");
+
+            const ctx = canvas.getContext("2d");
+
+            const engine = Engine.create();
+
+            const render = Render.create({
+                canvas: canvas,
+                engine: engine,
+                options: {
+                width: 480,
+                height: 720,
+                wireframes: false,
+                },
+            });
+
+            const times = [];
+            let fps = 100;
+
+            let mousePos;
+            let isClicking = false;
+            let isMouseOver = false;
+            let newSize = 1;
+
+            let isGameOver = false;
+            let score = 0;
+
+            let isLineEnable = false;
+
+            const background = Bodies.rectangle(240, 360, 480, 720, {
+                isStatic: true,
+                render: { fillStyle: "#fe9" },
+            });
+            background.collisionFilter = {
+                group: 0,
+                category: 1,
+                mask: -2,
+            };
+            const ground = Bodies.rectangle(400, 1220, 810, 1000, {
+                isStatic: true,
+                render: { fillStyle: "transparent" },
+            });
+            const wallLeft = Bodies.rectangle(-50, 500, 100, 1000, {
+                isStatic: true,
+                render: { fillStyle: "transparent" },
+            });
+            const wallRight = Bodies.rectangle(530, 500, 100, 1000, {
+                isStatic: true,
+                render: { fillStyle: "transparent" },
+            });
+            World.add(engine.world, [wallLeft, wallRight, ground, background]);
+
+            Engine.run(engine);
+            Render.run(render);
+
+            resize();
+
+            refreshLoop();
+
+            init();
+
+            window.addEventListener("resize", resize);
+
+            addEventListener("mousedown", () => {
+                if (isGameOver) return;
+
+                isClicking = isMouseOver;
+            });
+            addEventListener("touchstart", (e) => {
+                if (isGameOver) return;
+
+                isClicking = true;
+                mousePos = e.touches[0].clientX / parent.style.zoom;
+            });
+
+            addEventListener("mouseup", () => {
+                if (isGameOver) return;
+
+                isClicking = false;
+            });
+            addEventListener("touchend", () => {
+                if (isGameOver) return;
+
+                isClicking = false;
+
+                if (isGameOver) return;
+
+                if (ball != null) {
+                ball.createdAt = 0;
+                ball.collisionFilter = {
+                    group: 0,
+                    category: 1,
+                    mask: -1,
+                };
+                Body.setVelocity(ball, { x: 0, y: (100 / fps) * 5.5 });
+                ball = null;
+
+                newSize = Math.ceil(Math.random() * 3);
+
+                setTimeout(() => createNewBall(newSize), 500);
+                }
+            });
+
+            addEventListener("mousemove", (e) => {
+                if (isGameOver) return;
+
+                const rect = canvas.getBoundingClientRect();
+                mousePos = e.clientX / parent.style.zoom - rect.left;
+            });
+            addEventListener("touchmove", (e) => {
+                if (isGameOver) return;
+
+                const rect = canvas.getBoundingClientRect();
+                mousePos = e.touches[0].clientX / parent.style.zoom - rect.left;
+            });
+
+            addEventListener("click", () => {
+                if (isGameOver || !isMouseOver) return;
+
+                if (ball != null) {
+                ball.createdAt = 0;
+                ball.collisionFilter = {
+                    group: 0,
+                    category: 1,
+                    mask: -1,
+                };
+                Body.setVelocity(ball, { x: 0, y: (100 / fps) * 5.5 });
+                ball = null;
+
+                newSize = Math.ceil(Math.random() * 3)+1;
+
+                setTimeout(() => createNewBall(newSize), 500);
+                }
+            });
+
+            canvas.addEventListener("mouseover", () => {
+                isMouseOver = true;
+            });
+
+            canvas.addEventListener("mouseout", () => {
+                isMouseOver = false;
+            });
+
+            Events.on(engine, "beforeUpdate", () => {
+                if (isGameOver) return;
+
+                if (ball != null) {
+                const gravity = engine.world.gravity;
+                Body.applyForce(ball, ball.position, {
+                    x: -gravity.x * gravity.scale * ball.mass,
+                    y: -gravity.y * gravity.scale * ball.mass,
+                });
+
+                if (isClicking && mousePos !== undefined) {
+                    ball.position.x = mousePos;
+
+                    if (mousePos > 455) ball.position.x = 455;
+                    else if (mousePos < 25) ball.position.x = 25;
+                }
+
+                ball.position.y = 50;
+                }
+
+                isLineEnable = false;
+                const bodies = Composite.allBodies(engine.world);
+                for (let i = 4; i < bodies.length; i++) {
+                body = bodies[i];
+
+                if (body.position.y < 100) {
+                    if (
+                    body !== ball &&
+                    Math.abs(body.velocity.x) < 0.2 &&
+                    Math.abs(body.velocity.y) < 0.2
+                    ) {
+                    gameOver();
+                    }
+                } else if (body.position.y < 150) {
+                    if (
+                    body !== ball &&
+                    Math.abs(body.velocity.x) < 0.5 &&
+                    Math.abs(body.velocity.y) < 0.5
+                    ) {
+                    isLineEnable = true;
+                    }
+                }
+                }
+            });
+
+            Events.on(engine, "collisionActive", collisionEvent);
+            Events.on(engine, "collisionStart", collisionEvent);
+
+            function collisionEvent(e) {
+                if (isGameOver) return;
+
+                e.pairs.forEach((collision) => {
+                bodies = [collision.bodyA, collision.bodyB];
+
+                if (bodies[0].size === undefined || bodies[1].size === undefined) return;
+
+                if (bodies[0].size === bodies[1].size) {
+                    allBodies = Composite.allBodies(engine.world);
+                    if (allBodies.includes(bodies[0]) && allBodies.includes(bodies[1])) {
+                    if (
+                        (Date.now() - bodies[0].createdAt < 100 ||
+                        Date.now() - bodies[1].createdAt < 100) &&
+                        bodies[0].createdAt != 0 &&
+                        bodies[1].createdAt != 0
+                    ) {
+                        return;
+                    }
+
+                    World.remove(engine.world, bodies[0]);
+                    World.remove(engine.world, bodies[1]);
+
+                    World.add(
+                        engine.world,
+                        newBall(
+                        (bodies[0].position.x + bodies[1].position.x) / 2,
+                        (bodies[0].position.y + bodies[1].position.y) / 2,
+                        bodies[0].size === 11 ? 11 : bodies[0].size + 1
+                        )
+                    );
+
+                    score += bodies[0].size;
+
+                    var audio = new Audio("assets/pop.wav");
+                    audio.play();
+                    }
+                }
+                });
+            }
+
+            Events.on(render, "afterRender", () => {
+                if (isGameOver) {
+                ctx.fillStyle = "#ffffff55";
+                ctx.rect(0, 0, 480, 720);
+                ctx.fill();
+
+                writeText("Game Over", "center", 240, 280, 50);
+                writeText("Score: " + score, "center", 240, 320, 30);
+                } else {
+                writeText(score, "start", 25, 60, 40);
+
+                if (isLineEnable) {
+                    ctx.strokeStyle = "#f55";
+                    ctx.beginPath();
+                    ctx.moveTo(0, 100);
+                    ctx.lineTo(480, 100);
+                    ctx.stroke();
+                }
+                }
+            });
+
+            function writeText(text, textAlign, x, y, size) {
+                ctx.font = `${size}px NanumSquare`;
+                ctx.textAlign = textAlign;
+                ctx.lineWidth = size / 8;
+
+                ctx.strokeStyle = "#000";
+                ctx.strokeText(text, x, y);
+
+                ctx.fillStyle = "#fff";
+                ctx.fillText(text, x, y);
+            }
+
+            function resize() {
+                canvas.height = 720;
+                canvas.width = 480;
+
+                if (isMobile()) {
+                parent.style.zoom = window.innerWidth / 480;
+                parent.style.top = "0px";
+
+                floor.style.height = `${
+                    (window.innerHeight - canvas.height * parent.style.zoom) /
+                    parent.style.zoom
+                }px`;
+                } else {
+                parent.style.zoom = window.innerHeight / 720 / 1.3;
+                parent.style.top = `${(canvas.height * parent.style.zoom) / 15}px`;
+
+                floor.style.height = "50px";
+                }
+
+                Render.setPixelRatio(render, parent.style.zoom * 2);
+            }
+
+            function refreshLoop() {
+                window.requestAnimationFrame(() => {
+                const now = performance.now();
+                while (times.length > 0 && times[0] <= now - 1000) {
+                    times.shift();
+                }
+                times.push(now);
+                fps = times.length;
+                refreshLoop();
+                });
+            }
+
+            function isMobile() {
+                return window.innerHeight / window.innerWidth >= 1.49;
+            }
+
+            function init() {
+                isGameOver = false;
+                ball = null;
+                engine.timing.timeScale = 1;
+                score = 0;
+
+                gameOverlayer.style.display = "none";
+
+                while (engine.world.bodies.length > 4) {
+                engine.world.bodies.pop();
+                }
+
+                createNewBall(2);
+            }
+
+            function gameOver() {
+                isGameOver = true;
+                engine.timing.timeScale = 0;
+
+                gameOverlayer.style.display = "";
+
+                if (ball != null) World.remove(engine.world, ball);
+            }
+
+            function createNewBall(size) {
+                ball = newBall(render.options.width / 2, 50, size);
+                ball.collisionFilter = {
+                group: -1,
+                category: 2,
+                mask: 0,
+                };
+
+                World.add(engine.world, ball);
+            }
+
+            function newBall(x, y, size) {
+                c = Bodies.circle(x, y, size * 10, {
+                render: {
+                    sprite: {
+                    texture: `assets/img/${size}.png`,
+                    xScale: size / 12.75,
+                    yScale: size / 12.75,
+                    },
+                },
+                });
+                c.size = size;
+                c.createdAt = Date.now();
+                c.restitution = 0.3;
+                c.friction = 0.1;
+
+                return c;
+            }
+            })();
+
+      </script>
+  </body>
+</html>
